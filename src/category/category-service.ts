@@ -21,4 +21,8 @@ export class CategoryService {
         const category = await CategoryModel.findById(id);
         return category;
     }
+    async delete(id: string) {
+        const category = await CategoryModel.deleteOne({ _id: id });
+        return category;
+    }
 }

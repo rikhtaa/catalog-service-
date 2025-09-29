@@ -50,10 +50,26 @@ export class CategoryController {
         this.logger.info("All categories");
         res.json(allCategories);
     };
-    getById = async (req: Request, res: Response) => {
+    getById = async (req: Request, res: Response, next: NextFunction) => {
+        const result = validationResult(req);
+        if (!result.isEmpty()) {
+            return next(createHttpError(400, result.array()[0].msg as string));
+        }
+
         const { id } = req.params;
         const category = await this.categoryService.getById(id);
         this.logger.info("Category", { id });
         res.json(category);
+    };
+    delete = async (req: Request, res: Response, next: NextFunction) => {
+        const result = validationResult(req);
+        if (!result.isEmpty()) {
+            return next(createHttpError(400, result.array()[0].msg as string));
+        }
+
+        const { id } = req.params;
+        await this.categoryService.delete(id);
+        this.logger.info("deleted Category", { id });
+        res.json({ id: id });
     };
 }
