@@ -1,11 +1,11 @@
-import { NextFunction, Request, RequestHandler, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import createHttpError from "http-errors";
 
 type AsyncHandler = (
     req: Request,
     res: Response,
     next: NextFunction,
-) => Promise<RequestHandler>;
+) => Promise<void>;
 
 export const asyncWrapper = (requestHandler: AsyncHandler) => {
     return (req: Request, res: Response, next: NextFunction) => {
