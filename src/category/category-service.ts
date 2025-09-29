@@ -17,4 +17,8 @@ export class CategoryService {
         const allCategories = await CategoryModel.find();
         return allCategories;
     }
+    async getById(id: string) {
+        const category = await CategoryModel.findById(id);
+        return category;
+    }
 }

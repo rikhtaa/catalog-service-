@@ -50,4 +50,10 @@ export class CategoryController {
         this.logger.info("All categories");
         res.json(allCategories);
     };
+    getById = async (req: Request, res: Response) => {
+        const { id } = req.params;
+        const category = await this.categoryService.getById(id);
+        this.logger.info("Category", { id });
+        res.json(category);
+    };
 }

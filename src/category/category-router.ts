@@ -30,4 +30,6 @@ router.patch(
 
 router.get("/", authenticate, asyncWrapper(categoryController.getAll));
 
+router.get("/:id", authenticate, asyncWrapper(categoryController.getById));
+
 export default router;
