@@ -45,4 +45,9 @@ export class CategoryController {
         this.logger.info("Updated category", { id: updatedCategory?._id });
         res.json({ id: updatedCategory?._id });
     };
+    getAll = async (req: Request, res: Response) => {
+        const allCategories = await this.categoryService.getAll();
+        this.logger.info("All categories");
+        res.json(allCategories);
+    };
 }

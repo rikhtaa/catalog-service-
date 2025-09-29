@@ -7,7 +7,14 @@ export class CategoryService {
         return newCategory.save();
     }
     async update(id: string, category: Category) {
-        const updateCategory = CategoryModel.findByIdAndUpdate(id, category);
+        const updateCategory = await CategoryModel.findByIdAndUpdate(
+            id,
+            category,
+        );
         return updateCategory;
+    }
+    async getAll() {
+        const allCategories = await CategoryModel.find();
+        return allCategories;
     }
 }

@@ -28,4 +28,6 @@ router.patch(
     asyncWrapper(categoryController.update),
 );
 
+router.get("/", authenticate, asyncWrapper(categoryController.getAll));
+
 export default router;
