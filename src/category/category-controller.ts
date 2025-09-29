@@ -28,4 +28,21 @@ export class CategoryController {
         this.logger.info(`Created category`, { id: category._id });
         res.json({ id: category._id });
     };
+    update = async (req: Request, res: Response, next: NextFunction) => {
+        const result = validationResult(req);
+        if (!result.isEmpty()) {
+            return next(createHttpError(400, result.array()[0].msg as string));
+        }
+
+        const { name, priceConfiguration, attributes } = req.body as Category;
+        const { id } = req.params;
+
+        const updatedCategory = await this.categoryService.update(id, {
+            name,
+            priceConfiguration,
+            attributes,
+        });
+        this.logger.info("Updated category", { id: updatedCategory?._id });
+        res.json({ id: updatedCategory?._id });
+    };
 }

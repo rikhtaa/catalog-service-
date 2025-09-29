@@ -6,4 +6,8 @@ export class CategoryService {
         const newCategory = new CategoryModel(category);
         return newCategory.save();
     }
+    async update(id: string, category: Category) {
+        const updateCategory = CategoryModel.findByIdAndUpdate(id, category);
+        return updateCategory;
+    }
 }

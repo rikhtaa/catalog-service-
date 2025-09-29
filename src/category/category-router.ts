@@ -21,4 +21,11 @@ router.post(
     asyncWrapper(categoryController.create),
 );
 
+router.patch(
+    "/:id",
+    authenticate,
+    canAccess([Roles.ADMIN]),
+    asyncWrapper(categoryController.update),
+);
+
 export default router;
